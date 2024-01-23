@@ -11,19 +11,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5">
-      <div>
-        <% if user_signed_in? %>
-          <%= current_user.email %>
-          <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %>
-        <% else %>
-          <%= link_to 'Sign in', new_user_session_path %>
-        <% end %>
-      </div>
-
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+  <body class="h-screen bg-gray-50">
+    <main class="h-full container mx-auto px-5 flex flex-col items-center justify-center">
+      <%= component 'flash', content: notice %>
+      <%= component 'flash', content: alert, type: :alert %>
 
       <%= yield %>
     </main>
