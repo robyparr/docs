@@ -1,9 +1,9 @@
 class Organization < ApplicationRecord
-  before_create :set_slug
+  before_create :set_subdomain
 
   private
 
-  def set_slug
-    self.slug = name.parameterize
+  def set_subdomain
+    self.subdomain = name.parameterize
   end
 end
