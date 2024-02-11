@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   constraints subdomain: /.*/ do
     devise_for :users
+
+    namespace :api do
+      resources :documents, only: %i[create]
+    end
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
