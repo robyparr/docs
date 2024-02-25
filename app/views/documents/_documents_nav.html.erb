@@ -1,0 +1,13 @@
+<%# https://flowbite.com/docs/components/sidebar/ %>
+<nav>
+  <ul class="space-y-2 font-medium">
+    <% documents.each do |document| %>
+      <li>
+        <%= link_to document, class: 'flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group cursor:pointer' do %>
+          <%= component 'icon', icon: document.file? ? 'document-text' : 'folder' %>
+          <span class="ms-3"><%= document.basename %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

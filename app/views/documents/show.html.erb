@@ -1,0 +1,18 @@
+<% content_for :sidebar do %>
+  <%= render 'documents_nav', documents: @documents %>
+<% end %>
+
+<%= component 'breadcrumbs', path: @document.path, classes: 'mb-5' %>
+
+<% if @document.file? %>
+  <article class="prose">
+    <%= raw @document.render_content %>
+  </article>
+  <aside class="fixed top-0 right-0 m-10 bg-white border shadow p-4 rounded">
+    <h2 class="text-xl">Table of Contents</h1>
+    <%= raw @document.render_content_toc %>
+  </aside>
+<% else %>
+  <h2 class="mt-5 text-2xl">Documents</h2>
+  <%= render 'documents_nav', documents: @documents %>
+<% end %>

@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def set_layout
     user_signed_in? ? 'application' : 'guest'
   end
+
+  def current_organization
+    @current_organization ||= Organization.find_by! subdomain: request.subdomain
+  end
 end
