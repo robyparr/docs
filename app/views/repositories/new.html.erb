@@ -1,0 +1,6 @@
+<div class="mx-auto md:w-2/3 w-full">
+  <%= component 'page_header', content: 'New repository' %>
+
+  <%= render "form", repository: @repository %>
+  <%= component 'button', content: 'Back to repositories', href: repositories_path %>
+</div>

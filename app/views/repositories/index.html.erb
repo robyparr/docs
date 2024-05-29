@@ -1,0 +1,8 @@
+<div class="flex justify-between items-center">
+  <%= component 'page_header', content: 'Repositories' %>
+  <%= component 'button', content: 'New repo', href: new_repository_path %>
+</div>
+
+<div id="repositories" class="min-w-full">
+  <%= render @repositories %>
+</div>

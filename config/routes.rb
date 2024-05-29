@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  root 'documents#index'
+  root 'repositories#index'
 
   constraints subdomain: /.*/ do
     devise_for :users
 
+    resources :repositories
     resources :documents, only: %i[index show]
 
     namespace :api do

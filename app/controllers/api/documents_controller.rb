@@ -7,7 +7,7 @@ class Api::DocumentsController < Api::BaseController
     ActiveRecord::Base.transaction do
       documents_attrs.each do |attrs|
         path = attrs[:path]
-        document = documents_by_path[path] || current_organization.documents.build(path:)
+        document = documents_by_path[path] || repository.documents.build(path:, organization: current_organization)
 
         parent_path = path.split('/')[..-2].join('/')
         attrs[:parent] = documents_by_path[parent_path]
@@ -21,6 +21,10 @@ class Api::DocumentsController < Api::BaseController
   end
 
   private
+
+  def repository
+    @repository ||= current_organization.repositories.find params[:repository_id]
+  end
 
   def permitted_params
     params.permit documents: %i[path content]
@@ -53,7 +57,7 @@ class Api::DocumentsController < Api::BaseController
   def documents_by_path
     @documents_by_path ||= begin
       paths = documents_attrs.map { _1[:path] }
-      current_organization.documents.where(path: paths).to_a.index_by(&:path)
+      repository.documents.where(path: paths).to_a.index_by(&:path)
     end
   end
 end

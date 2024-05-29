@@ -1,0 +1,13 @@
+<% content_for :sidebar do %>
+  <%= render 'documents/documents_nav', documents: @repository.documents %>
+<% end %>
+
+<div class="mx-auto md:w-2/3 w-full flex">
+  <div class="mx-auto">
+    <%= render @repository %>
+
+    <%= component 'button', content: 'Edit', href: edit_repository_path(@repository) %>
+    <%= component 'button', content: 'Delete', href: repository_path(@repository), method: :delete %>
+    <%= component 'button', content: 'Back to repositories', href: repositories_path %>
+  </div>
+</div>

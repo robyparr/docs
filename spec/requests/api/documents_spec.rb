@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Api::Documents', type: :request do
   let!(:org) { create :organization, subdomain: 'test' }
   let!(:user) { create :user, organization: org }
+  let!(:repo) { create :repository, organization: org, user: }
 
   before do
     host! 'test.example.com'
@@ -21,7 +22,7 @@ RSpec.describe 'Api::Documents', type: :request do
     end
 
     it 'creates new documents' do
-      expect { post '/api/documents', params: { documents: documents_attrs } }
+      expect { post '/api/documents', params: { repository_id: repo.id, documents: documents_attrs } }
         .to change { Document.count }.from(0).to(4)
 
       expect(response).to have_http_status(:ok)
@@ -60,13 +61,13 @@ RSpec.describe 'Api::Documents', type: :request do
     end
 
     context 'documents with the same path exist' do
-      let!(:folder_doc) { create :document, organization: org, path: 'folder', content: nil }
-      let!(:top_doc) { create :document, organization: org, path: 'top-level.md' }
-      let!(:p1_doc) { create :document, organization: org, path: 'folder/page-one.md' }
-      let!(:p2_doc) { create :document, organization: org, path: 'folder/page-two.md' }
+      let!(:folder_doc) { create :document, organization: org, repository: repo, path: 'folder', content: nil }
+      let!(:top_doc) { create :document, organization: org, repository: repo, path: 'top-level.md' }
+      let!(:p1_doc) { create :document, organization: org, repository: repo, path: 'folder/page-one.md' }
+      let!(:p2_doc) { create :document, organization: org, repository: repo, path: 'folder/page-two.md' }
 
       it 'updates the existing documents' do
-        expect { post '/api/documents', params: { documents: documents_attrs } }
+        expect { post '/api/documents', params: { repository_id: repo.id, documents: documents_attrs } }
           .not_to change { Document.count }.from(4)
 
         expect(response).to have_http_status(:ok)

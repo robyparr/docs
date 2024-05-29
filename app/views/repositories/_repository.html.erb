@@ -1,0 +1,12 @@
+<div id="<%= dom_id repository %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= repository.name %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= component 'button', content: 'Show this repository', href: repository %>
+    <%= component 'button', content: 'Edit', href: edit_repository_path(repository) %>
+    <hr class="mt-6">
+  <% end %>
+</div>
