@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_124839) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_30_083707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_tokens", force: :cascade do |t|
+    t.bigint "repository_id", null: false
+    t.string "token", null: false
+    t.string "name", null: false
+    t.datetime "last_used_at"
+    t.integer "usage_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id"], name: "index_api_tokens_on_repository_id"
+    t.index ["token"], name: "index_api_tokens_on_token", unique: true
+  end
 
   create_table "documents", force: :cascade do |t|
     t.bigint "organization_id"
@@ -75,6 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_124839) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "api_tokens", "repositories", on_delete: :cascade
   add_foreign_key "documents", "documents", column: "parent_id"
   add_foreign_key "documents", "organizations"
   add_foreign_key "documents", "repositories", on_delete: :cascade

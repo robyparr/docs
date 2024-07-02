@@ -1,0 +1,14 @@
+<%= component 'page_header', content: "Edit token '#{@token.name}'" %>
+
+<%= form_with(model: @token, url: repository_api_token_path(@repository, @token)) do |form| %>
+  <div class="my-5">
+    <%= component 'label', form: form, name: :name %>
+    <%= component 'input', form: form, type: :text_field, name: :name, invalid: @token.errors[:name].any? %>
+    <%= component 'input_error', errors: @token.errors[:name] %>
+  </div>
+
+  <div class="inline">
+    <%= component 'button', href: @repository, content: 'Back' %>
+    <%= component 'submit', form: form, content: 'Save Token' %>
+  </div>
+<% end %>

@@ -22,10 +22,6 @@ class Api::DocumentsController < Api::BaseController
 
   private
 
-  def repository
-    @repository ||= current_organization.repositories.find params[:repository_id]
-  end
-
   def permitted_params
     params.permit documents: %i[path content]
   end

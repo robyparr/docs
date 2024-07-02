@@ -2,12 +2,29 @@
   <%= render 'documents/documents_nav', documents: @repository.documents %>
 <% end %>
 
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
-    <%= render @repository %>
+<%= component 'page_header' do |component| %>
+  <%= @repository.name %>
+  <% component.with_action { component 'button', content: 'Back to repositories', href: repositories_path } %>
+  <% component.with_action { component 'button', content: 'Edit', href: edit_repository_path(@repository) } %>
+  <% component.with_action { component 'button', content: 'Delete', href: repository_path(@repository), method: :delete } %>
+  <% component.with_action { component 'button', content: 'Generate API Token', href: repository_api_tokens_path(@repository), method: :post } %>
+<% end %>
 
-    <%= component 'button', content: 'Edit', href: edit_repository_path(@repository) %>
-    <%= component 'button', content: 'Delete', href: repository_path(@repository), method: :delete %>
-    <%= component 'button', content: 'Back to repositories', href: repositories_path %>
-  </div>
-</div>
+<%= render @repository %>
+
+<h3 class="text-xl mb-2">API Tokens</h3>
+<table class="w-full">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Token</th>
+      <th>Created</th>
+      <th>Last Used</th>
+      <th>Usage Count</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @repository.api_tokens %>
+  </tbody>
+</table>

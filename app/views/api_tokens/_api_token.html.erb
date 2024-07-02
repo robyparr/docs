@@ -1,0 +1,11 @@
+<tr>
+  <td><%= api_token.name %></td>
+  <td><%= api_token.token %></td>
+  <td><%= api_token.created_at %></td>
+  <td><%= api_token.last_used_at %></td>
+  <td><%= api_token.usage_count %></td>
+  <td>
+    <%= component 'button', content: 'Edit', href: edit_repository_api_token_path(@repository, api_token) %>
+    <%= component 'button', content: 'Delete', href: repository_api_token_path(@repository, api_token), method: :delete %>
+  </td>
+</tr>

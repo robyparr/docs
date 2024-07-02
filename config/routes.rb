@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   constraints subdomain: /.*/ do
     devise_for :users
 
-    resources :repositories
+    resources :repositories do
+      resources :api_tokens, only: %i[create edit update destroy]
+    end
+
     resources :documents, only: %i[index show]
 
     namespace :api do
