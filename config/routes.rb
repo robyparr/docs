@@ -6,9 +6,8 @@ Rails.application.routes.draw do
 
     resources :repositories do
       resources :api_tokens, only: %i[create edit update destroy]
+      resources :documents, only: %i[show]
     end
-
-    resources :documents, only: %i[index show]
 
     namespace :api do
       resources :documents, only: %i[create]

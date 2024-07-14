@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <%= render 'documents_nav', documents: @documents %>
+  <%= render 'documents_nav', repository: @repository, documents: @documents %>
 <% end %>
 
 <%= component 'breadcrumbs', path: @document.path, classes: 'mb-5' %>
@@ -14,5 +14,5 @@
   </aside>
 <% else %>
   <h2 class="mt-5 text-2xl">Documents</h2>
-  <%= render 'documents_nav', documents: @documents %>
+  <%= render 'documents_nav', repository: @repository, documents: @documents %>
 <% end %>
