@@ -3,7 +3,10 @@
 <% end %>
 
 <%= component 'page_header' do |component| %>
-  <%= @repository.name %>
+  <div class="flex items-center space-x-2">
+    <%= component 'icon', icon: @repository.public? ? 'lock-open' : 'lock-closed' %>
+    <span><%= @repository.name %></span>
+  </div>
   <% component.with_action { component 'button', content: 'Back to repositories', href: repositories_path } %>
   <% component.with_action { component 'button', content: 'Edit', href: edit_repository_path(@repository) } %>
   <% component.with_action { component 'button', content: 'Delete', href: repository_path(@repository), method: :delete } %>

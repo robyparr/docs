@@ -1,8 +1,15 @@
 <div id="<%= dom_id repository %>">
   <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
+    <strong class="font-medium">Name:</strong>
     <%= repository.name %>
   </p>
+
+  <% if repository.public? %>
+    <p class="my-5">
+      <strong class="font-medium">Public URL:</strong>
+      <%= public_root_url(repository.public_slug) %>
+    </p>
+  <% end %>
 
   <% if action_name != "show" %>
     <%= component 'button', content: 'Show this repository', href: repository %>

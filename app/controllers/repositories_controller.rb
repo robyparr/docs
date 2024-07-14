@@ -48,6 +48,6 @@ class RepositoriesController < ApplicationController
   private
 
   def repository_params
-    params.require(:repository).permit(:name)
+    params.require(:repository).permit(:name, :public)
   end
 end

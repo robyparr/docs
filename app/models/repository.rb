@@ -9,4 +9,12 @@ class Repository < ApplicationRecord
   has_many :api_tokens, dependent: :destroy
 
   validates :name, presence: true
+
+  before_update :set_public_slug, if: :public?
+
+  private
+
+  def set_public_slug
+    self.public_slug ||= name.parameterize
+  end
 end

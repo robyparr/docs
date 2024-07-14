@@ -5,6 +5,11 @@
     <%= component 'input_error', errors: repository.errors[:name] %>
   </div>
 
+  <div class="my-5">
+    <%= component 'input', form: form, type: :check_box, name: :public %>
+    <%= component 'label', form: form, name: :public, inline: true %>
+  </div>
+
   <div class="inline">
     <%= component 'submit', form: form, content: 'Save repository' %>
   </div>

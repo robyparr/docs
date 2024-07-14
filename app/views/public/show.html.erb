@@ -1,0 +1,6 @@
+<% content_for :sidebar do %>
+  <%= render 'documents/documents_nav', repository: @repository, documents: @repository.root_documents %>
+<% end %>
+
+<%= component 'page_header', content: @repository.name %>
+<%= render 'documents/documents_nav', repository: @repository, documents: @repository.root_documents %>
